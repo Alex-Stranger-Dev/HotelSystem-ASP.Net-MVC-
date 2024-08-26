@@ -1,0 +1,96 @@
+﻿@model HotelSystem.Models.Booking
+
+@{
+    ViewBag.Title = "Details of Booking";
+}
+
+
+
+@using (Html.BeginForm("Update", "Booking", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.Id)
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Room Id</th>
+                <th>Customer Id</th>
+                <th>Check In Date</th>
+                <th>Check Out Date</th>
+                <th>Total Amount</th>
+                <th>Note</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(m => m.Id)</td>
+                <td>@Html.TextBoxFor(m => m.RoomId)</td>
+                <td>@Html.TextBoxFor(m => m.CustomerId)</td>
+                <td>@Html.TextBoxFor(m => m.CheckInDate, "{0:yyyy-MM-dd-hh-mm}")</td>
+                <td>@Html.TextBoxFor(m => m.CheckOutDate, "{0:yyyy-MM-dd-hh-mm}")</td>
+                <td>@Html.TextBoxFor(m => m.TotalAmount)</td>
+                <td>@Html.TextBoxFor(m => m.Note)</td>
+               
+                <td>
+                    <input type="submit" value="Update" class="btn btn-success" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+@using (Html.BeginForm("Delete", "Booking", new { Id = Model.Id }, FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.Id)
+    <input type="submit" value="Delete" class="btn btn-danger" />
+}
+
+
+
+<!--<script>
+    $(function () {
+        $('#updateForm').submit(function (e) {
+            e.preventDefault(); // Остановить стандартное поведение отправки формы
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: $(this).serialize(),
+                success: function (response) {
+                    $('#resultMessage').text(response.message); // Установить текст сообщения
+                    $('#resultModal').modal('show'); // Показать модальное окно
+                },
+                error: function () {
+                    $('#resultMessage').text("Something went wrong!");
+                    $('#resultModal').modal('show');
+                }
+            });
+        });
+    });</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+<!-- Bootstrap CSS -->
+<!--<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">-->
+<!-- Bootstrap JS и jQuery -->
+<!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+<!-- Модальное окно -->
+<!--<div id="resultModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Result</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="resultMessage"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>-->
+<!---->
+@**@

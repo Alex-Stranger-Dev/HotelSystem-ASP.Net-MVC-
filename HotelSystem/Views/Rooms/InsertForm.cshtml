@@ -1,0 +1,34 @@
+﻿@model HotelSystem.Models.Rooms
+
+@{
+    ViewBag.Title = "Adding new Rooms";
+}
+
+
+@using (Html.BeginForm("Insert", "Rooms", FormMethod.Post))
+{
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Room Number</th>
+                <th>Room Type</th>
+                <th>Price per nigth</th>
+                <th>Note</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(m => m.Id)</td>
+                <td>@Html.TextBoxFor(m => m.RoomNumber)</td>
+                <td>@Html.TextBoxFor(m => m.RoomType)</td>
+                <td>@Html.TextBoxFor(m => m.PricePerNigth)</td>
+                <td>@Html.TextAreaFor(m => m.Note)</td>
+                <td>
+                    <input type="submit" value="Insert" class="btn btn-success" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}

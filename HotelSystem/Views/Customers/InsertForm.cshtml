@@ -1,0 +1,40 @@
+﻿@model HotelSystem.Models.Customers
+
+@{
+    ViewBag.Title = "Adding new Customer";
+}
+
+
+@using (Html.BeginForm("Insert", "Customers", FormMethod.Post))
+{
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Address</th>
+                <th>Date Of Birth</th>
+                <th>Note</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(m => m.Id)</td>
+                <td>@Html.TextBoxFor(m => m.FirstName)</td>
+                <td>@Html.TextBoxFor(m => m.LastName)</td>
+                <td>@Html.TextBoxFor(m => m.Email)</td>
+                <td>@Html.TextBoxFor(m => m.PhoneNumber)</td>
+                <td>@Html.TextBoxFor(m => m.Address)</td>
+                <td>@Html.TextBoxFor(m => m.DateOfBirth)</td>
+                <td>@Html.TextAreaFor(m => m.Note)</td>
+                <td>
+                    <input type="submit" value="Insert" class="btn btn-success" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<HotelSystem.Models.Customers>
+
+@{
+    ViewBag.Title = "List of Customers";
+}
+
+<h2>List of Customers</h2>
+<td>
+    @*@Html.ActionLink("Insert", "Customers", new { }, new { @class = "btn btn-primary" })*@
+    @Html.ActionLink("Add New", "InsertForm", "Customers", new { area = "" }, new { @class = "btn btn-primary" })
+</td>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Address</th>
+            <th>Date Of Birth</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customers in Model)
+        {
+            <tr>
+                <td>@customers.Id</td>
+                <td>@customers.FirstName</td>
+                <td>@customers.LastName</td>
+                <td>@customers.Email</td>
+                <td>@customers.PhoneNumber</td>
+                <td>@customers.Address</td>
+                <td>@customers.DateOfBirth.ToString("dd.MM.yyyy")</td>
+                
+                <td>
+                    @Html.ActionLink("Details", "Details", new { Id = customers.Id }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

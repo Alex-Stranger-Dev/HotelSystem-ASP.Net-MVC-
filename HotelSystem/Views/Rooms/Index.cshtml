@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Rooms";
+}
+
+<h2>Rooms</h2>
+<td>
+    @*@Html.ActionLink("Insert", "Rooms", new { }, new { @class = "btn btn-primary" })*@
+    @Html.ActionLink("Add New", "InsertForm", "Rooms", new { area = "" }, new { @class = "btn btn-primary" })
+</td>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Room Number</th>
+            <th>Room Type</th>
+            <th>Price per nigth</th>
+            <th>Note</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var rooms in Model)
+        {
+            <tr>
+                <td>@rooms.Id</td>
+                <td>@rooms.RoomNumber</td>
+                <td>@rooms.RoomType</td>
+                <td>@rooms.PricePerNigth</td>
+                <td>@rooms.Note</td>
+                <td>
+                    @Html.ActionLink("Edit", "Details", new { id = rooms.Id }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
