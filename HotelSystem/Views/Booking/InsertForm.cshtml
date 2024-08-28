@@ -11,23 +11,19 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Room Id</th>
                 <th>Customer Id</th>
                 <th>Check In Date</th>
                 <th>Check Out Date</th>
-                <th>Total Amount</th>
                 <th>Note</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>@Html.DisplayFor(m => m.Id)</td>
                 <td>@Html.TextBoxFor(m => m.RoomId)</td>
                 <td>@Html.TextBoxFor(m => m.CustomerId)</td>
-                <td>@Html.TextBoxFor(m => m.CheckInDate, "{0:yyyy-MM-dd-hh-mm}")</td>
-                <td>@Html.TextBoxFor(m => m.CheckOutDate, "{0:yyyy-MM-dd-hh-mm}")</td>
-                <td>@Html.TextBoxFor(m => m.TotalAmount)</td>
+                <td>@Html.TextBoxFor(m => m.CheckInDate, new { @type = "date" }) </td>
+                <td>@Html.TextBoxFor(m => m.CheckOutDate, new { @type = "date" })</td>
                 <td>@Html.TextAreaFor(m => m.Note)</td>
                 <td>
                     <input type="submit" value="Insert" class="btn btn-success" />

@@ -43,18 +43,21 @@ namespace HotelSystem.Data.DataAccess
 
         public bool Update(Models.Booking data)
         {
+            var formattedDate = DateTime.Parse(data.CheckInDate.ToString("yyyy-MM-dd HH:mm"));
+            var formattedDate2 = DateTime.Parse(data.CheckOutDate.ToString("yyyy-MM-dd HH:mm"));
+
             using (IDbConnection db = new SqlConnection(_connectionString))
             {                
                 try
                 {
-                    string sqlQuery = "EXEC Booking_Update @RoomId, @CustomerId, @CheckInDate, @CheckOutDate, @Note";
+                    string sqlQuery = "EXEC Booking_Update @Id, @RoomId, @CustomerId, @CheckInDate, @CheckOutDate, @Note";
                     db.Execute(sqlQuery, new
                     {
-                        RoomId = data.RoomId,
-                        CustomerId = data.CustomerId,
-                        CheckInDate = data.CheckInDate,
-                        CheckOutDate = data.CheckOutDate,
-                        //TotalAmount = data.TotalAmount,
+                        Id = data.Id,
+                        RoomId = Convert.ToInt32(data.RoomId),
+                        CustomerId = Convert.ToInt32(data.CustomerId),
+                        CheckInDate = formattedDate,
+                        CheckOutDate = formattedDate2,
                         Note = data.Note,
                     });
                     return true;
@@ -70,8 +73,8 @@ namespace HotelSystem.Data.DataAccess
 
         public bool Insert(Models.Booking data)
         {
-            //var formattedDate = data.DateOfBirth.ToString("yyyy-MM-dd");
-
+            var formattedDate = DateTime.Parse(data.CheckInDate.ToString("yyyy-MM-dd HH:mm"));
+            var formattedDate2 = DateTime.Parse(data.CheckOutDate.ToString("yyyy-MM-dd HH:mm"));
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 try
@@ -81,10 +84,9 @@ namespace HotelSystem.Data.DataAccess
                     {
                         RoomId = data.RoomId,
                         CustomerId = data.CustomerId,
-                        CheckInDate = data.CheckInDate,
-                        CheckOutDate = data.CheckOutDate,
-                        //TotalAmount = data.TotalAmount,
-                        Note = data.Note,
+                        CheckInDate = formattedDate,
+                        CheckOutDate = formattedDate2,
+                        Note = data.Note
                     });
                     return true;
 

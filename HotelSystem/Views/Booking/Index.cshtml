@@ -10,21 +10,18 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>ID</th>
             <th>Room Id</th>
             <th>Customer Id</th>
             <th>Check In Date</th>
             <th>Check Out Date</th>
             <th>Total Amount</th>
             <th>Note</th>
-            <th>TEST</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var booking in Model)
         {
             <tr>
-                <td>@booking.Id</td>
                 <td>@booking.RoomId</td>
                 <td>@booking.CustomerId</td>
                 <td>@booking.CheckInDate.ToString("dd.MM.yyyy.hh.mm")</td>
