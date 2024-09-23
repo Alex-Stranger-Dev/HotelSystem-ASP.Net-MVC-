@@ -130,6 +130,7 @@
     <Compile Include="Data\BookingDapper.cs" />
     <Compile Include="Data\RoomsDapper.cs" />
     <Compile Include="Data\CustomerDapper.cs" />
+    <Compile Include="Enum\TypeOfRooms.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

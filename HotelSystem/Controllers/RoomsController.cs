@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace HotelSystem.Controllers
+namespace HotelSystem.Rooms
 {
     public class RoomsController : Controller
     {
@@ -36,11 +36,11 @@ namespace HotelSystem.Controllers
             bool result = manager.Update(rooms);
             if (result)
             {
-                return Json(new { success = true, message = "Data is updated" });
+                return Json(new { success = true, message = "Data is updated", reloadPage = true });
             }
             else
             {
-                return Json(new { success = false, message = "Something went wrong" });
+                return Json(new { success = false, message = "Something went wrong", redirectUrl = Url.Action("Index", "Rooms") });
             }
         }
 
@@ -71,11 +71,11 @@ namespace HotelSystem.Controllers
             bool result = manager.Insert(rooms);
             if (result)
             {
-                return Json(new { success = true, message = "Data is added" });
+                return Json(new { success = true, message = "Data is added", reloadPage = true });
             }
             else
             {
-                return Json(new { success = false, message = "Something went wrong" });
+                return Json(new { success = false, message = "Something went wrong", redirectUrl = Url.Action("Index", "Rooms") });
             }
 
         }

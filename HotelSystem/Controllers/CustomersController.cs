@@ -21,7 +21,7 @@ namespace HotelSystem.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            var customers = manager.GetAllCustomers(); //F11 ili Go To Implementation
+            var customers = manager.GetAllCustomers(); 
             return View(customers);
         }
 
@@ -39,11 +39,11 @@ namespace HotelSystem.Controllers
             bool result = manager.Update(customer);
             if (result)
             {
-                return Json(new{ success = true, message = "Data is updated" });
+                return Json(new{ success = true, message = "Data is updated", reloadPage = true });
             }
             else
             {
-                return Json(new { success = false, message = "Something went wrong" });
+                return Json(new { success = false, message = "Something went wrong", redirectUrl = Url.Action("Index", "Customers") });
             }
         }
 
@@ -74,7 +74,7 @@ namespace HotelSystem.Controllers
             bool result = manager.Insert(customer);
             if (result)
             {
-                return Json(new { success = true, message = "Data is added" });
+                return Json(new { success = true, message = "Data is added",  reloadPage = true });
             }
             else
             {

@@ -1,5 +1,6 @@
 ﻿using HotelSystem.Data.DataAccess;
 using HotelSystem.Managers;
+using HotelSystem.Rooms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,13 @@ namespace HotelSystem.Controllers
         public ActionResult Details(int Id)
         {
             var booking = _manager.GetBooking(Id);
+            
+            var customers = new CustomersController().Index() as ViewResult;
+            ViewBag.Customers = customers.Model;
+
+            
+            var rooms = new RoomsController().Index() as ViewResult;
+            ViewBag.Rooms = rooms.Model;
             return View(booking);
         }
 
@@ -36,11 +44,11 @@ namespace HotelSystem.Controllers
             bool result = _manager.Update(booking);
             if (result)
             {
-                return Json(new { success = true, message = "Data is updated" });
+                return Json(new { success = true, message = "Data is updated", reloadPage = true });
             }
             else
             {
-                return Json(new { success = false, message = "Something went wrong" });
+                return Json(new { success = false, message = "Something went wrong", redirectUrl = Url.Action("Index", "Booking") });
             }
         }
 
@@ -61,6 +69,11 @@ namespace HotelSystem.Controllers
 
         public ActionResult InsertForm()
         {
+            var customers = new CustomersController().Index() as ViewResult;
+            ViewBag.Customers = customers.Model;
+
+            var rooms = new RoomsController().Index() as ViewResult;
+            ViewBag.Rooms = rooms.Model;
 
             return View();
         }
@@ -71,7 +84,7 @@ namespace HotelSystem.Controllers
             bool result = _manager.Insert(booking);
             if (result)
             {
-                return Json(new { success = true, message = "Data is added" });
+                return Json(new { success = true, message = "Data is added", reloadPage = true });
             }
             else
             {

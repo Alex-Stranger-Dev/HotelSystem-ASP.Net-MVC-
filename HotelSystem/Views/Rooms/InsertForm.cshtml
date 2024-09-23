@@ -4,17 +4,15 @@
     ViewBag.Title = "Adding new Rooms";
 }
 
-
 @using (Html.BeginForm("Insert", "Rooms", FormMethod.Post))
 {
-    
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Room Number</th>
                 <th>Room Type</th>
-                <th>Price per nigth</th>
+                <th>Price per night</th>
                 <th>Note</th>
             </tr>
         </thead>
@@ -22,8 +20,14 @@
             <tr>
                 <td>@Html.DisplayFor(m => m.Id)</td>
                 <td>@Html.TextBoxFor(m => m.RoomNumber)</td>
-                <td>@Html.TextBoxFor(m => m.RoomType)</td>
-                <td>@Html.TextBoxFor(m => m.PricePerNigth)</td>
+                <td>
+                    @Html.DropDownListFor(m => m.RoomType, Enum.GetValues(typeof(HotelSystem.Enum.TypeOfRooms)).Cast<HotelSystem.Enum.TypeOfRooms>().Select(e => new SelectListItem
+                    {
+                        Value = ((int)e).ToString(),
+                        Text = e.ToString()
+                    }), "Select Room Type", new { @class = "form-control" })
+                </td>
+                <td>@Html.DropDownListFor(m => m.PricePerNigth, new SelectList(new List<string> { "85", "150", "200" }), "Select Price per nigth", new { @class = "form-control" })</td>
                 <td>@Html.TextAreaFor(m => m.Note)</td>
                 <td>
                     <input type="submit" value="Insert" class="btn btn-success" />
@@ -31,4 +35,51 @@
             </tr>
         </tbody>
     </table>
+}
+
+<!--Modal-->
+<div class="modal fade" id="resultModal" tabindex="-1" role="dialog" aria-labelledby="resultModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="resultModalLabel">Result</h5>
+                <button id="closeModalButton" type="button" class="close hiding" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="resultMessage"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('form').submit(function (event) {
+                event.preventDefault();
+
+                var form = $(this);
+                $.ajax({
+                    url: form.attr('action'),
+                    type: form.attr('method'),
+                    data: form.serialize(),
+                    success: function (response) {
+                        $('#resultMessage').text(response.message);
+                        $('#resultModal').modal('show');
+                    },
+                    error: function () {
+                        $('#resultMessage').text('An error occurred while processing your request.');
+                        $('#resultModal').modal('show');
+                    }
+                });
+            });
+        });
+
+        $('#closeModalButton').on('click', function () {
+            $('#resultModal').css('visibility', 'hidden').modal('hide');
+            window.location.href = '@Url.Action("Index", "Rooms")';
+        });
+    </script>
 }
