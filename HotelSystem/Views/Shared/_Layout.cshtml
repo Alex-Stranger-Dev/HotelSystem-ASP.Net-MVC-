@@ -18,9 +18,9 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                    
-                    <li>@Html.ActionLink("Customers", "Index", "Customers", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Rooms", "Index", "Rooms", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Booking", "Index", "Booking", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Customers", "Index", "Customers", new { area = "" }, new { @class = "nav-link auth-required" } )</li>
+                    <li>@Html.ActionLink("Rooms", "Index", "Rooms", new { area = "" }, new { @class = "nav-link auth-required" })</li>
+                    <li>@Html.ActionLink("Booking", "Index", "Booking", new { area = "" }, new { @class = "nav-link auth-required" })</li>
                 </ul>
             </div>
         </div>
